@@ -1,25 +1,61 @@
-import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import CheckBox from '@react-native-community/checkbox';
 
-export default function ListItem({item}) {
+export default function ListItem({item, deleteItem}) {
+    const [toggleCheckBox, setToggleCheckBox] = useState(false)
+
   return (
-    <TouchableOpacity style={styles.listItem}>
-        <Text style={styles.text}>{item.text}</Text>
-        <Icon name="trash-2" size={20} color='firebrick' />
-    </TouchableOpacity>
+    <View style={[styles.listItem, toggleCheckBox && styles.listItemContainerChecked]}>
+        <View style={styles.checkboxText}>
+            <CheckBox
+                boxType={"square"}
+                disabled={false}
+                value={toggleCheckBox}
+                onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                style={styles.checkbox}
+            />
+            <Text style={[styles.listText, toggleCheckBox && styles.listItemTextChecked]}>{item.text}</Text>
+        </View>
+        <TouchableOpacity onPress={() => deleteItem(item.id)}>
+            <Icon name="trash-2" size={24} color='firebrick' />
+        </TouchableOpacity>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+    checkboxText: {
+        display: 'flex',
+        flexDirection: 'row',
+    },
     listItem: {
-        paddingHorizontal: 20,
+        paddingLeft: 35,
+        paddingRight: 20,
         paddingVertical: 15,
         borderTopWidth: 1,
         borderBottomWidth: 1,
         borderColor: '#eee',
-        backgroundColor: '#'
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
-    text: {
+    listItemContainerChecked: {
+        backgroundColor: 'lightgray',
+    },
+    listItemTextChecked: {
+        textDecorationLine: 'line-through',
+        textDecorationStyle: 'solid',
+        color: '#6b7280',
+    },
+    listText: {
+        fontSize: 18,
+        paddingLeft: 20,
+    },
+    checkbox: {
+        height: 20,
+        width: 20,
     },
 });

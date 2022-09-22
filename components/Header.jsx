@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
 
 const Header = ({title}) => {
     return (
@@ -12,14 +12,29 @@ const Header = ({title}) => {
 const styles = StyleSheet.create({
     header: {
         backgroundColor: 'cornflowerblue',
-        height: 60,
+        paddingTop: 5,
+        paddingBottom: 10,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
     },
     text: {
+        position: 'relative',
+        textAlign: 'center',
         color: 'white',
         fontSize: 26,
+        width: '100%',
+    },
+    addItemContainer: {
+        position: 'absolute',
+        right: 20,
+    },
+    addItemIcon: {
+    },
+    input: {
+        backgroundColor: 'red',
+        flex: 1,
+        width: '100%',
     },
 });
 
