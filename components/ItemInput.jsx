@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 export default function ItemInput({addItem, addItemText, setAddItemText}) {
-
     return (
         <View>
             <TextInput

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, SafeAreaView, StyleSheet, FlatList, Text} from 'react-native';
+import React, { useState } from 'react';
+import { View, SafeAreaView, StyleSheet, FlatList, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Header from './components/Header';
 import ItemInput from './components/ItemInput';
 import ListItem from './components/ListItem';
@@ -21,26 +21,40 @@ const App = () => {
     }
 
     const addItem = (inputText) => {
-        setItems(prevItems => {
-            return [...prevItems, {id: uuid.v4(), text: inputText}]
-        })
-        setAddItemText('');
+        if (inputText.length > 1) {
+                setItems(prevItems => {
+                return [...prevItems, {id: uuid.v4(), text: inputText}]
+            })
+            setAddItemText('');
+
+        } else {
+            Alert.alert(
+                "Error Adding Item",
+                "Item length is too short, please try adding more information.",
+                [{
+                    cancelable: true,
+                    text: 'Ok',
+                    onPress: () => {},
+                }]
+            )
+        }
+        
     }
 
     return (
-        <View style={styles.container}>
-            <SafeAreaView style={styles.safeView}>
-                <Header title='Shopping List' />
-            </SafeAreaView>
-            <ItemInput addItem={addItem} addItemText={addItemText} setAddItemText={setAddItemText} />
-            <FlatList
-                style={styles.listView} 
-                data={items} 
-                renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem} />} 
-            />
-        </View>
-            
-        
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+            <View style={styles.container}>
+                <SafeAreaView style={styles.safeView}>
+                    <Header title='Shopping List' />
+                </SafeAreaView>
+                <ItemInput addItem={addItem} addItemText={addItemText} setAddItemText={setAddItemText} />
+                <FlatList
+                    style={styles.listView} 
+                    data={items} 
+                    renderItem={({item}) => <ListItem item={item} deleteItem={deleteItem} />} 
+                />
+            </View>
+        </TouchableWithoutFeedback>
     );
 };
 
