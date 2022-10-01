@@ -3,20 +3,20 @@ import {View, Text, StyleSheet, TouchableOpacity, Button} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import CheckBox from '@react-native-community/checkbox';
 
-export default function ListItem({item, deleteItem}) {
-    const [toggleCheckBox, setToggleCheckBox] = useState(false)
-
+export default function ListItem({item, deleteItem, checkItemsHandler}) {
   return (
-    <View style={[styles.listItem, toggleCheckBox && styles.listItemContainerChecked]}>
+    <View style={[styles.listItem, item.checked && styles.listItemContainerChecked]}>
         <View style={styles.checkboxText}>
             <CheckBox
                 boxType={"square"}
                 disabled={false}
-                value={toggleCheckBox}
-                onValueChange={(newValue) => setToggleCheckBox(newValue)}
+                value={item.checked}
+                onValueChange={() => {
+                  checkItemsHandler(item.id);
+                }}
                 style={styles.checkbox}
             />
-            <Text style={[styles.listText, toggleCheckBox && styles.listItemTextChecked]}>{item.text}</Text>
+            <Text style={[styles.listText, item.checked && styles.listItemTextChecked]}>{item.text}</Text>
         </View>
         <TouchableOpacity onPress={() => deleteItem(item.id)}>
             <Icon name="trash-2" size={24} color='firebrick' />
