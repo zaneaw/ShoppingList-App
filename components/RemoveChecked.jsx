@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 export default function RemoveChecked({deleteCheckedItems}) {
   return (
     <TouchableOpacity style={styles.removeCheckedButton} onPress={() => deleteCheckedItems()}>
-        <Text>Remove Selected</Text>
+        <Text style={styles.text}>Remove Selected</Text>
     </TouchableOpacity>
   )
 }
@@ -13,8 +13,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 'auto',
-    height: 40,
-    borderWidth: 1,
-    borderColor: 'red',
+    borderWidth: 2,
+    borderColor: 'cornflowerblue',
+    paddingVertical: 8,
+    marginBottom: 1,
   },
+  text: {
+    fontSize: 20,
+  }
 })
