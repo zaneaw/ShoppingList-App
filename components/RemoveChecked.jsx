@@ -15,8 +15,7 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
     borderWidth: 2,
     borderColor: 'cornflowerblue',
-    paddingVertical: 8,
-    marginBottom: 1,
+    paddingVertical: 6,
   },
   text: {
     fontSize: 20,
